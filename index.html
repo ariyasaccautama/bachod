@@ -12,27 +12,29 @@
       box-sizing: border-box;
     }
 
+    html, body {
+      height: 100%;
+      width: 100%;
+    }
+
     body {
-      height: 100vh;
       background: linear-gradient(135deg, #fceabb, #f8b500);
       display: flex;
       justify-content: center;
       align-items: center;
       font-family: 'Playfair Display', serif;
-    }
-
-    .text-wrapper {
       text-align: center;
     }
 
     h1 {
-      font-size: 7rem;
+      font-size: 12vw;
       color: #ffffff;
       background: linear-gradient(90deg, #ff6a00, #ee0979);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       animation: fadeIn 2s ease-in-out;
-      letter-spacing: 0.3em;
+      letter-spacing: 0.1em;
+      word-break: break-word;
     }
 
     @keyframes fadeIn {
@@ -45,11 +47,17 @@
         transform: translateY(0);
       }
     }
+
+    /* Tambahan untuk layar HP sangat kecil */
+    @media (max-width: 400px) {
+      h1 {
+        font-size: 15vw;
+        letter-spacing: 0.05em;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="text-wrapper">
-    <h1>BACHOD</h1>
-  </div>
+  <h1>BACHOD</h1>
 </body>
 </html>
