@@ -1,63 +1,162 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BACHOD</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <title>Maafin Aku, Tyas 🥺</title>
   <style>
-    * {
+    body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-    }
-
-    html, body {
-      height: 100%;
-      width: 100%;
-    }
-
-    body {
-      background: linear-gradient(135deg, #fceabb, #f8b500);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: 'Playfair Display', serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #ffe6e6, #fff0f5);
       text-align: center;
+      overflow: hidden;
+      position: relative;
     }
-
     h1 {
-      font-size: 12vw;
-      color: #ffffff;
-      background: linear-gradient(90deg, #ff6a00, #ee0979);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: fadeIn 2s ease-in-out;
-      letter-spacing: 0.1em;
-      word-break: break-word;
+      color: #c0392b;
+      margin-top: 30px;
+      font-size: 2.2em;
+      position: relative;
+      z-index: 1;
     }
-
-    @keyframes fadeIn {
-      0% {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    p.desc {
+      font-size: 1.1em;
+      margin-bottom: 40px;
+      color: #555;
+      position: relative;
+      z-index: 1;
     }
-
-    /* Tambahan untuk layar HP sangat kecil */
-    @media (max-width: 400px) {
-      h1 {
-        font-size: 15vw;
-        letter-spacing: 0.05em;
+    .btn {
+      padding: 15px 25px;
+      font-size: 1em;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    #yesBtn {
+      background-color: #f39c12;
+      color: white;
+      position: relative;
+      z-index: 1;
+    }
+    #noBtn {
+      background-color: #e74c3c;
+      color: white;
+      position: relative;
+      z-index: 2;
+    }
+    #button-wrapper {
+      position: relative;
+      margin-top: 30px;
+      z-index: 1;
+    }
+    #button-container {
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+    #instruction {
+      margin-top: 30px;
+      font-size: 0.95em;
+      color: #666;
+      position: relative;
+      z-index: 1;
+    }
+    .emoji {
+      font-size: 2em;
+      animation: float 4s infinite ease-in-out;
+      position: absolute;
+      pointer-events: none;
+      z-index: 0;
+    }
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+    @media (max-width: 768px) {
+      h1 { font-size: 1.8em; }
+      .btn { font-size: 0.9em; }
+      #button-container {
+        flex-direction: column;
+        gap: 20px;
       }
     }
   </style>
 </head>
 <body>
-  <h1>BACHOD</h1>
+  <!-- MASUKKAN LINK LAGU DI BAWAH INI (gunakan .mp3 URL atau link lagu bebas streaming yang mendukung autoplay) -->
+  <audio autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+    Lagu tidak tersedia.
+  </audio>
+
+  <h1>Tyas, aku minta maaf... 😔</h1>
+  <p class="desc">Aku sadar aku salah. Aku harap kamu bisa memaafkanku.</p>
+  <h2 style="position: relative; z-index: 1;">Apakah kamu mau memaafkan aku? 🙏</h2>
+
+  <div id="button-wrapper">
+    <div id="button-container">
+      <button class="btn" id="yesBtn">Iya, dimaafin ❤️</button>
+      <button class="btn" id="noBtn">Enggak mau maafin 😤</button>
+    </div>
+  </div>
+
+  <p id="instruction">Gunakan kursor untuk memilih tombol yaa... 😺💕</p>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+
+    yesBtn.onclick = function () {
+      window.location.href =
+        "https://wa.me/6281383564000?text=iya%20aku%20maafin,%20jangan%20diulangi%20lagi%20yah";
+    };
+
+    let moveCooldown = false;
+
+    document.addEventListener("mousemove", function (e) {
+      const rect = noBtn.getBoundingClientRect();
+      const distX = e.clientX - (rect.left + rect.width / 2);
+      const distY = e.clientY - (rect.top + rect.height / 2);
+      const distance = Math.sqrt(distX * distX + distY * distY);
+
+      if (distance < 200 && !moveCooldown) {
+        moveCooldown = true;
+        const offsetX = (Math.random() - 0.5) * 600;
+        const offsetY = (Math.random() - 0.5) * 600;
+        let newX = rect.left + offsetX;
+        let newY = rect.top + offsetY;
+
+        newX = Math.max(0, Math.min(window.innerWidth - rect.width, newX));
+        newY = Math.max(0, Math.min(window.innerHeight - rect.height, newY));
+
+        noBtn.style.position = 'fixed';
+        noBtn.style.left = `${newX}px`;
+        noBtn.style.top = `${newY}px`;
+
+        setTimeout(() => { moveCooldown = false; }, 120);
+      }
+    });
+
+    // Tambah emoji lucu mengambang (tidak menutupi konten)
+    const emojiList = ["🐱", "😺", "😻", "😽", "🐾", "🐈", "🐈‍⬛", "💕", "💖", "💞", "💘", "🌸", "😽", "💗"];
+    for (let i = 0; i < 70; i++) {
+      const span = document.createElement("span");
+      span.classList.add("emoji");
+      span.textContent = emojiList[Math.floor(Math.random() * emojiList.length)];
+      span.style.left = Math.random() * 100 + "vw";
+      span.style.top = Math.random() * 100 + "vh";
+      document.body.appendChild(span);
+    }
+  </script>
 </body>
 </html>
