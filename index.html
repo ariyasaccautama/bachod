@@ -106,9 +106,40 @@
         display: block;
       }
     }
+
+    /* Splash screen style */
+    #loadingScreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #fff;
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    #loadingScreen h2 {
+      color: #c0392b;
+      margin-bottom: 10px;
+    }
+
+    #loadingScreen p {
+      font-size: 1em;
+      color: #444;
+    }
   </style>
 </head>
 <body>
+  <!-- Splash screen -->
+  <div id="loadingScreen">
+    <h2>Hai Tyas 💌</h2>
+    <p>Coba klik ❤️ ini deh</p>
+  </div>
+
   <!-- Audio akan diputar setelah klik -->
   <audio id="bgm" loop>
     <source src="https://media.vocaroo.com/mp3/1hhkLbLiNIVd" type="audio/mpeg">
@@ -140,12 +171,15 @@
     const yesBtn = document.getElementById("yesBtn");
     const cursorDot = document.getElementById("cursor-dot");
 
-    // Autoplay audio setelah interaksi klik pertama
+    // Autoplay musik setelah klik awal + hilangkan splash screen
     window.addEventListener('click', function () {
       const audio = document.getElementById('bgm');
       audio.play().catch(e => {
         console.log("Autoplay gagal:", e);
       });
+
+      const splash = document.getElementById('loadingScreen');
+      if (splash) splash.style.display = 'none';
     }, { once: true });
 
     yesBtn.onclick = function () {
