@@ -53,8 +53,8 @@
     #noBtn {
       background-color: #e74c3c;
       color: white;
-      position: fixed;
-      z-index: 9999;
+      position: relative;
+      z-index: 2;
     }
     #button-wrapper {
       position: relative;
@@ -118,9 +118,9 @@
     Lagu tidak tersedia.
   </audio>
 
-  <h1 class="text-box">Tyas, aku mau minta maaf😔</h1><br>
-  <p class="desc text-box">Aku sadar aku salah. Aku minta maaf yaahh.</p><br>
-  <h2 class="text-box">Kamu mau kan maafin aku? 🙏</h2>
+  <h2 class="text-box">Tyas, aku mau minta maaf😔</h2><br>
+  <p class="desc text-box">Aku sadar aku salah. Aku minta maaf yaaaahh.</p><br>
+  <h3 class="text-box">Kamu mau kan maafin aku? 🙏</h3>
 
   <p class="text-box">
     心から謝ります。あなたの笑顔をもう一度見たいです。
@@ -172,8 +172,9 @@
         newX = Math.max(0, Math.min(window.innerWidth - rect.width, newX));
         newY = Math.max(0, Math.min(window.innerHeight - rect.height, newY));
 
-        noBtn.style.left = `${newX}px`;
-        noBtn.style.top = `${newY}px`;
+        noBtn.style.position = 'fixed';
+        noBtn.style.left = ${newX}px;
+        noBtn.style.top = ${newY}px;
 
         setTimeout(() => { moveCooldown = false; }, 120);
       }
