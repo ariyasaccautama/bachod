@@ -14,19 +14,25 @@
       overflow: hidden;
       position: relative;
     }
+    .text-box {
+      background-color: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      display: inline-block;
+    }
+    h1, p.desc, h2, #instruction {
+      position: relative;
+      z-index: 1;
+    }
     h1 {
       color: #c0392b;
       margin-top: 30px;
       font-size: 2.2em;
-      position: relative;
-      z-index: 1;
     }
     p.desc {
       font-size: 1.1em;
       margin-bottom: 40px;
       color: #555;
-      position: relative;
-      z-index: 1;
     }
     .btn {
       padding: 15px 25px;
@@ -63,12 +69,20 @@
       align-items: center;
       padding: 0 20px;
     }
+    #cursor-dot {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background-color: #ff69b4;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 999;
+      display: none;
+    }
     #instruction {
       margin-top: 30px;
       font-size: 0.95em;
       color: #666;
-      position: relative;
-      z-index: 1;
     }
     .emoji {
       font-size: 2em;
@@ -89,6 +103,9 @@
         flex-direction: column;
         gap: 20px;
       }
+      #cursor-dot {
+        display: block;
+      }
     }
   </style>
 </head>
@@ -99,9 +116,9 @@
     Lagu tidak tersedia.
   </audio>
 
-  <h1>Tyas, aku minta maaf... 😔</h1>
-  <p class="desc">Aku sadar aku salah. Aku harap kamu bisa memaafkanku.</p>
-  <h2 style="position: relative; z-index: 1;">Apakah kamu mau memaafkan aku? 🙏</h2>
+  <h1 class="text-box">Tyas, aku minta maaf... 😔</h1>
+  <p class="desc text-box">Aku sadar aku salah. Aku minta maaf yah.</p>
+  <h2 class="text-box">Kamu mau kan maafin aku? 🙏</h2>
 
   <div id="button-wrapper">
     <div id="button-container">
@@ -110,20 +127,29 @@
     </div>
   </div>
 
-  <p id="instruction">Gunakan kursor untuk memilih tombol yaa... 😺💕</p>
+  <p id="instruction" class="text-box">Pakai kursor buat pilih tombolnya yaa... 😺💕</p>
+
+  <div id="cursor-dot"></div>
 
   <script>
     const noBtn = document.getElementById("noBtn");
     const yesBtn = document.getElementById("yesBtn");
+    const cursorDot = document.getElementById("cursor-dot");
 
     yesBtn.onclick = function () {
       window.location.href =
-        "https://wa.me/6281383564000?text=iya%20aku%20maafin,%20jangan%20diulangi%20lagi%20yah";
+        "https://wa.me/6281383564028?text=iya%20aku%20maafin,%20jangan%20diulangi%20lagi%20yah";
     };
 
     let moveCooldown = false;
 
+    function moveCursorDot(e) {
+      cursorDot.style.left = e.clientX + "px";
+      cursorDot.style.top = e.clientY + "px";
+    }
+
     document.addEventListener("mousemove", function (e) {
+      moveCursorDot(e);
       const rect = noBtn.getBoundingClientRect();
       const distX = e.clientX - (rect.left + rect.width / 2);
       const distY = e.clientY - (rect.top + rect.height / 2);
@@ -147,7 +173,6 @@
       }
     });
 
-    // Tambah emoji lucu mengambang (tidak menutupi konten)
     const emojiList = ["🐱", "😺", "😻", "😽", "🐾", "🐈", "🐈‍⬛", "💕", "💖", "💞", "💘", "🌸", "😽", "💗"];
     for (let i = 0; i < 70; i++) {
       const span = document.createElement("span");
