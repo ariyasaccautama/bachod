@@ -109,7 +109,8 @@
   </style>
 </head>
 <body>
-  <audio autoplay loop>
+  <!-- Audio akan diputar setelah klik -->
+  <audio id="bgm" loop>
     <source src="https://media.vocaroo.com/mp3/1hhkLbLiNIVd" type="audio/mpeg">
     Lagu tidak tersedia.
   </audio>
@@ -138,6 +139,14 @@
     const noBtn = document.getElementById("noBtn");
     const yesBtn = document.getElementById("yesBtn");
     const cursorDot = document.getElementById("cursor-dot");
+
+    // Autoplay audio setelah interaksi klik pertama
+    window.addEventListener('click', function () {
+      const audio = document.getElementById('bgm');
+      audio.play().catch(e => {
+        console.log("Autoplay gagal:", e);
+      });
+    }, { once: true });
 
     yesBtn.onclick = function () {
       window.location.href =
