@@ -53,8 +53,8 @@
     #noBtn {
       background-color: #e74c3c;
       color: white;
-      position: relative;
-      z-index: 2;
+      position: fixed;
+      z-index: 9999;
     }
     #button-wrapper {
       position: relative;
@@ -114,13 +114,13 @@
 </head>
 <body>
   <audio autoplay loop>
-    <source src="https://vocaroo.com/embed/1GLMAR2YRJ42?autoplay=0" type="audio/mpeg">
+    <source src="https://media.vocaroo.com/mp3/1hhkLbLiNIVd" type="audio/mpeg">
     Lagu tidak tersedia.
   </audio>
 
-  <h2 class="text-box">Tyas, aku mau minta maaf😔</h2><br>
-  <p class="desc text-box">Aku sadar aku salah. Aku minta maaf yaaaahh.</p><br>
-  <h3 class="text-box">Kamu mau kan maafin aku? 🙏</h3>
+  <h1 class="text-box">Tyas, aku mau minta maaf😔</h1><br>
+  <p class="desc text-box">Aku sadar aku salah. Aku minta maaf yaahh.</p><br>
+  <h2 class="text-box">Kamu mau kan maafin aku? 🙏</h2>
 
   <p class="text-box">
     心から謝ります。あなたの笑顔をもう一度見たいです。
@@ -172,7 +172,6 @@
         newX = Math.max(0, Math.min(window.innerWidth - rect.width, newX));
         newY = Math.max(0, Math.min(window.innerHeight - rect.height, newY));
 
-        noBtn.style.position = 'fixed';
         noBtn.style.left = `${newX}px`;
         noBtn.style.top = `${newY}px`;
 
