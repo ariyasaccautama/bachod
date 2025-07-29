@@ -19,10 +19,12 @@
       padding: 10px 20px;
       border-radius: 10px;
       display: inline-block;
+      z-index: 10;
+      position: relative;
     }
     h1, p.desc, h2, #instruction {
       position: relative;
-      z-index: 1;
+      z-index: 10;
     }
     h1 {
       color: #c0392b;
@@ -68,6 +70,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 0 20px;
+      z-index: 10;
     }
     #cursor-dot {
       position: fixed;
@@ -110,17 +113,15 @@
   </style>
 </head>
 <body>
-  <!-- MASUKKAN LINK LAGU DI BAWAH INI (gunakan .mp3 URL atau link lagu bebas streaming yang mendukung autoplay) -->
   <audio autoplay loop>
     <source src="https://vocaroo.com/embed/1GLMAR2YRJ42?autoplay=0" type="audio/mpeg">
     Lagu tidak tersedia.
   </audio>
 
   <h2 class="text-box">Tyas, aku mau minta maaf😔</h2><br>
-  <p class="desc text-box">Aku sadar aku salah. Aku minta maaf yaaahhh.</p><br>
+  <p class="desc text-box">Aku sadar aku salah. Aku minta maaf yaaaahh.</p><br>
   <h3 class="text-box">Kamu mau kan maafin aku? 🙏</h3>
 
-  <!-- Kalimat Bahasa Jepang -->
   <p class="text-box">
     心から謝ります。あなたの笑顔をもう一度見たいです。
   </p>
@@ -180,12 +181,29 @@
     });
 
     const emojiList = ["🐱", "😺", "😻", "😽", "🐾", "🐈", "🐈‍⬛", "💕", "💖", "💞", "💘", "🌸", "😽", "💗"];
+    const avoidZone = document.querySelectorAll('.text-box');
+
     for (let i = 0; i < 70; i++) {
-      const span = document.createElement("span");
+      let span = document.createElement("span");
       span.classList.add("emoji");
       span.textContent = emojiList[Math.floor(Math.random() * emojiList.length)];
-      span.style.left = Math.random() * 100 + "vw";
-      span.style.top = Math.random() * 100 + "vh";
+
+      let top, left, overlap;
+      do {
+        top = Math.random() * 100 + "vh";
+        left = Math.random() * 100 + "vw";
+        overlap = false;
+        avoidZone.forEach(box => {
+          const rect = box.getBoundingClientRect();
+          if (parseInt(left) >= rect.left && parseInt(left) <= rect.right &&
+              parseInt(top) >= rect.top && parseInt(top) <= rect.bottom) {
+            overlap = true;
+          }
+        });
+      } while (overlap);
+
+      span.style.left = left;
+      span.style.top = top;
       document.body.appendChild(span);
     }
   </script>
